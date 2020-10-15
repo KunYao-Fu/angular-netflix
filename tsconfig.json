@@ -14,7 +14,30 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@user/*": [
+        "src/app/modules/user/*"
+      ],
+      "@overlay/*": [
+        "src/app/shared/modules/overlay/*"
+      ],
+      "@services/*": [
+        "src/app/shared/services/*"
+      ],
+      "@models/*": [
+        "src/app/utilities/models/*"
+      ],
+      "@utilities/*": [
+        "src/app/utilities/*"
+      ],
+      "@guest/*": [
+        "src/app/modules/guest/*"
+      ],
+      "@auth/*": [
+        "src/app/auth/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
