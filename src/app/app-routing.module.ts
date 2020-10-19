@@ -12,10 +12,18 @@ const routes: Routes = [{
     {
       path: 'guest',
       loadChildren: () => import('./modules/guest/guest.module').then(m => m.GuestModule)
+    },
+    {
+      path: 'account-manage',
+      loadChildren: () => import('./modules/account-manage/account-manage.module').then(m => m.AccountManageModule)
+    },
+    {
+      path: 'dashboard',
+      loadChildren:() => import('./modules/dashboard/dashboard-routing.module').then(m => m.DashboardRoutingModule)
     }
   ]
 },
-{path: '404', component: ErrorComponent}];
+{ path: '404', component: ErrorComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

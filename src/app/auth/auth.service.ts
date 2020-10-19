@@ -36,7 +36,7 @@ export class AuthService {
     this.$fbAuth.signInWithPopup(new fb.auth.GoogleAuthProvider()).then(
       res => {
         if (res.additionalUserInfo.isNewUser) {
-          this.createUser(res.user).then(
+          this.createUser(res.user, true).then(
             _ => this.router.navigate(['account-manage'])
           );
         }
@@ -50,7 +50,7 @@ export class AuthService {
     this.router.navigate(['guest']);
   }
 
-  private createUser(user: fb.UserInfo): Promise<void> {
+  private createUser(user: fb.UserInfo, isNewUser = false): Promise<void> {
     const USER = new User({
       email: user.email,
       name: user.displayName,
@@ -61,7 +61,7 @@ export class AuthService {
           id: account.id,
           lan: account.lan,
           name: account.name
-        }))
+        }), isNewUser)
       })
     )
   }

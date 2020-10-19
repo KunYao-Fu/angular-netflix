@@ -19,10 +19,10 @@ export class UserService {
   private user: ReplaySubject<User> = new ReplaySubject(1);
   public user$ = this.user.asObservable();
 
-  public createUser(uid: string, data: any) {
+  public createUser(uid: string, data: any, isNewUser = false) {
     this.$fb.document('accounts', uid).read$().subscribe(
       accounts => {
-        const USER = new User(data, uid, accounts.data().accounts);
+        const USER = new User(data, uid, accounts.data().accounts, isNewUser);
         this.user.next(USER);
       }
     )
@@ -37,9 +37,15 @@ export class UserService {
   public createAccount(name: string) {
     this.user$.pipe(take(1)).subscribe(
       user => {
-        const ACCOUNT = new Account(user.accounts.length + 1, name);
+        let maxId = 1
+        user.accounts.forEach(account => {
+          if (account.id > maxId) {
+            maxId = account.id
+          }
+        })
+        const ACCOUNT = new Account(maxId + 1, name);
         const ACCOUNTS = { ...{}, ...{ accounts: user.accounts } };
-        ACCOUNTS.accounts.push(ACCOUNT);
+        ACCOUNTS.accounts.push({ ...{}, ...ACCOUNT });
         ACCOUNTS.accounts = ACCOUNTS.accounts.map(account => ({
           id: account.id,
           lan: account.lan,

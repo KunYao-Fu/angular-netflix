@@ -1,20 +1,39 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
-  canActivateChild(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+
+  constructor(
+    private $auth: AuthService,
+    private router: Router
+  ) {
   }
   
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (!this.$auth.isLogin && !state.url.includes('guest')) {
+      this.router.navigate(['guest'])
+    }
+    // if (this.$auth.isLogin && !state.url.includes('dashboard')) {
+    //   this.router.navigate(['dashboard'])
+    // }
+    return true
+  }
+
+  canActivateChild(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (this.$auth.isLogin) {
+      if (state.url.includes('guest')) {
+        return false;
+      }
+    } else {
+      if (!state.url.includes('guest')) {
+        this.router.navigate(['guest'])
+      }
+    }
+    return true;
+  }
 }

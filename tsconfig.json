@@ -36,7 +36,7 @@
       ],
       "@auth/*": [
         "src/app/auth/*"
-      ]
+      ],
     }
   },
   "angularCompilerOptions": {

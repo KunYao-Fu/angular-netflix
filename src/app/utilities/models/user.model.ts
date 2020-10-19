@@ -7,9 +7,10 @@ export class User implements IUser {
     constructor(
         public profile: any,
         public uid: string,
-        public accounts: IAccount[] = []
+        public accounts: IAccount[] = [],
+        public isNewUser: boolean = false,
     ) {
-        if (accounts.length === 0) {
+        if (accounts.length === 0 && this.isNewUser) {
             this.initalUserDefaultInfo();
         }
     }
