@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  public onClick = false
+  public isShowTerms = false
+  public isShowSignUpGoogle = false
   public account
   public password
   public index = 0
