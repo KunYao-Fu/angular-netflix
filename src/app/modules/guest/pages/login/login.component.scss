@@ -56,6 +56,10 @@
                     color: white;
                     font-weight: bolder;
                     margin: 1.5rem 0px 1rem 0px;
+                    &:disabled {
+                        cursor: not-allowed;
+                        background-color: lightgray;
+                    }
                 }
             }
             & > div:last-child {
@@ -173,6 +177,16 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    &__Field {
+        margin-top: 1rem;
+        & > span {
+            color: red;
+            margin-top: 1rem;
+            font-size: 0.5rem;
+            display: flex;
         }
     }
 }

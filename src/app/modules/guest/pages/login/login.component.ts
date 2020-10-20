@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth/auth.service';
 import { FirebaseService } from '@services/firebase.service';
@@ -14,20 +15,29 @@ export class LoginComponent implements OnInit {
     private $fb: FirebaseService,
     public router: Router,
     public $auth: AuthService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    this.initial();
   }
   
-  public onClick = false
-  public account
-  public password
-  public index = 0
+  public isShowTerms = false
+  public auth: FormGroup;
 
-  public submit() {
-    console.log(this.account)
-    this.index = this.index + 1
-    this.$fb.document('users', 'user' + this.index).create({ account: this.account, password: this.password })
+  public signUp() {
+    this.router.navigate(['/guest']);
+  }
+
+  private initial() {
+    this.auth = this.formBuilder.group({
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    })
+  }
+
+  public login() {
+    this.$auth.loginByEmail(this.auth.getRawValue());
   }
 
 }
