@@ -14,6 +14,7 @@ const routes: Routes = [{
     { path: '', redirectTo: 'index' },
     { path: 'index', component: IndexComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'login/:email', component: LoginComponent },
   ]
 }];
 
