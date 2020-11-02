@@ -43,7 +43,7 @@ export class AuthService {
       }
     )
   }
- 
+
   public loginByEmail({ email, password }) {
     console.log(email, password)
     this.$fbAuth.signInWithEmailAndPassword(email, password).then(

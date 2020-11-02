@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators }
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth/auth.service';
 import { FirebaseService } from '@services/firebase.service';
+import { ValidatorService } from '@services/validator.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
     public $auth: AuthService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private $validator: ValidatorService
   ) { }
 
   ngOnInit(): void {
@@ -48,7 +50,7 @@ export class LoginComponent implements OnInit {
   }
 
   private validateEmail(control: AbstractControl): ValidationErrors {
-    return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/.test(control.value) ? null : { invalid: { message: 'test' } };
+    return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/.test(control.value) ? null : { invalid: { message: '請填寫正確Email格式' } };
   }
 
 }

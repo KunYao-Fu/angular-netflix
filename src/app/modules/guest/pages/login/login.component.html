@@ -1,7 +1,7 @@
 <div class="Login">
     <div class="Login__Content">
         <div>
-            <img src="../../../../../assets/img/Logo_Netflix.png" alt="" (click)="this.router.navigate(['guest'])">
+            <img src="assets/img/Logo_Netflix.png" alt="" (click)="this.router.navigate(['guest'])">
         </div>
         <div>
             <p>登入</p>
@@ -26,7 +26,6 @@
                 <div>
                     <i class="fa fa-google"></i>
                     <p (click)="this.$auth.loginByGoogle()">以 Google 登入</p>
-                    <i *ngIf="this.isShowSignUpGoogle" class="fa fa-arrow-left"></i>
                 </div>
                 <div>
                     <p>尚未加入 Netflix?<a (click)='this.signUp()'>馬上註冊</a>。</p>
