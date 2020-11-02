@@ -43,6 +43,21 @@ export class AuthService {
       }
     )
   }
+ 
+  public loginByEmail({ email, password }) {
+    console.log(email, password)
+    this.$fbAuth.signInWithEmailAndPassword(email, password).then(
+      res => {
+        if (res.additionalUserInfo.isNewUser) {
+          this.createUser(res.user, true).then(
+            _ => this.router.navigate(['account-manage'])
+          );
+        }
+      }
+    ).catch(
+      error => console.log(error)
+    )
+  }
 
   public logout() {
     sessionStorage.clear();
