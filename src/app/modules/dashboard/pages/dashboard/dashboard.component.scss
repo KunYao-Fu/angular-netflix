@@ -66,6 +66,27 @@
             word-wrap: break-word;
             padding: 1.5rem 0px;
         }
+        & > button:nth-child(5) {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            border: none;
+            outline: none;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 2.5rem;
+            width: 4rem;
+            background-color: rgb(229, 9, 20);
+            border-radius: 3px;
+            font-size: 1rem;
+            font-family: Arial, Helvetica, sans-serif;
+            &:hover {
+                cursor: pointer;
+            }
+        }
         & > div:last-child {
             & > button {
                 height: 4rem;

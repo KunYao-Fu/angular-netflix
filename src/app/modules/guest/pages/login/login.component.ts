@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
   }
 
   private validateEmail(control: AbstractControl): ValidationErrors {
-    return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/.test(control.value) ? null : { invalid: { message: 'test' } };
+    return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/.test(control.value) ? null : { invalid: { message: '請填寫正確Email格式' } };
   }
 
 }

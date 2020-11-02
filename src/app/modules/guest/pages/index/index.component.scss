@@ -331,6 +331,10 @@
                 & > i {
                     margin-left: 0.7rem;
                 }
+                &:disabled {
+                    cursor: not-allowed;
+                    background-color: lightgray;
+                }
             }
         }
     }
