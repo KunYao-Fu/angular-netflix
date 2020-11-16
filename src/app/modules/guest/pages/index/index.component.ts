@@ -14,7 +14,7 @@ export class IndexComponent implements OnInit {
   constructor(
     private router: Router,
     private $fb: FirebaseService,
-    private $auth: AuthService,
+    public $auth: AuthService,
     private formBuilder: FormBuilder,
   ) { }
 

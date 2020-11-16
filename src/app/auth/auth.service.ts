@@ -5,6 +5,8 @@ import { User } from '@models/user.model';
 import { FirebaseService } from '@services/firebase.service';
 import { UserService } from '@services/user.service';
 import * as fb from 'firebase/app';
+import { ReplaySubject } from 'rxjs';
+import { distinctUntilChanged, filter, map, startWith, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,18 @@ export class AuthService {
         }
       }
     );
+  }
+
+  private email: ReplaySubject<string> = new ReplaySubject();
+  public email$ = this.email.asObservable().pipe(
+    filter(_ => _.length > 8),
+    filter(_ => _.includes('*')),
+    map(_ => _.split('*')[1].length > 3),
+    distinctUntilChanged()
+  )
+
+  public changeEmail(email:string) {
+    this.email.next(email)
   }
 
   get isLogin() {
