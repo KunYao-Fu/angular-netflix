@@ -32,13 +32,25 @@ export class AuthService {
 
   private email: ReplaySubject<string> = new ReplaySubject();
   public email$ = this.email.asObservable().pipe(
-    filter(_ => _.length > 8),
-    filter(_ => _.includes('*')),
-    map(_ => _.split('*')[1].length > 3),
-    distinctUntilChanged()
+    map (_ => this.testEmailStrenth(_))
   )
 
-  public changeEmail(email:string) {
+  public testEmailStrenth(email) {
+    let x = 0;
+    if (email.length > 8) {
+      x = x + 1
+    }
+    else {
+      if (email.includes('*')) {
+        x = x + 1
+      }
+      else (email.split('*')[1].length > 3)
+        x = x + 1
+    }
+    return x
+  }
+
+  public changeEmail(email: string) {
     this.email.next(email)
   }
 
