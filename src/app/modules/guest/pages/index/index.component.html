@@ -10,7 +10,8 @@
         <p>準備開心觀賞了嗎？請輸入您的電郵，以建立或存取您的帳戶。</p>
         <div [formGroup]="this.auth">
             <input formControlName="email" class='form-control' type="text" placeholder="電郵地址">
-            <button (click)="this.signUp()" [disabled]="this.auth.invalid">開始使用<i class="fa fa-angle-right"></i></button>
+            <button (click)="this.signUp()" [disabled]="this.auth.invalid">開始使用<i
+                    class="fa fa-angle-right"></i></button>
         </div>
         <span></span><!-- 遮罩 -->
     </div>
@@ -22,7 +23,9 @@
         <div>
             <img src="assets/img/Tv.png" alt="">
             <div>
-                <video src="assets/video/Tv_video.m4v" autoplay muted loop></video>
+                <video autoplay muted loop>
+                    <source src="assets/video/Tv_video.m4v">
+                </video>
             </div>
         </div>
     </div>
@@ -51,7 +54,9 @@
         <div>
             <img src="assets/img/Mobile.png" alt="">
             <div>
-                <video src="assets/video/Mobile_video.m4v" autoplay muted loop></video>
+                <video autoplay muted loop>
+                    <source src="assets/video/Mobile_video.m4v">
+                </video>
             </div>
         </div>
     </div>
@@ -85,7 +90,8 @@
         <p>準備開心觀賞了嗎？請輸入您的電郵，以建立或存取您的帳戶。</p>
         <div [formGroup]="this.auth">
             <input formControlName="email" class='form-control' type="text" placeholder="電郵地址">
-            <button (click)="this.signUp()" [disabled]="this.auth.invalid">開始使用<i class="fa fa-angle-right"></i></button>
+            <button (click)="this.signUp()" [disabled]="this.auth.invalid">開始使用<i
+                    class="fa fa-angle-right"></i></button>
         </div>
     </div>
 </div>
