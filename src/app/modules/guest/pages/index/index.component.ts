@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth/auth.service';
 import { FirebaseService } from '@services/firebase.service';
@@ -27,7 +27,7 @@ export class IndexComponent implements OnInit {
 
   public initial() {
     this.auth = this.formBuilder.group({
-      email: ['', [Validators.required]]
+      email: ['', [Validators.required, this.validateEmail]]
     })
   }
 
@@ -37,7 +37,7 @@ export class IndexComponent implements OnInit {
   }
 
   public signUp() {
-    this.router.navigate(['guest/login',this.auth.get('email').value])
+    this.router.navigate(['guest/login', this.auth.get('email').value])
   }
 
   public openDropdown(status: string) {
@@ -47,5 +47,14 @@ export class IndexComponent implements OnInit {
     else {
       this.dropdownStatus = status
     }
+  }
+
+  private validateEmail(emailField: AbstractControl): ValidationErrors {
+    return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/.test(emailField.value) ?
+      null : {
+        invalid: {
+          message: '信箱格式不符'
+        }
+      }
   }
 }

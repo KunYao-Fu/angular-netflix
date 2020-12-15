@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   private initial() {
     this.auth = this.formBuilder.group({
       email: [this.route.snapshot.paramMap.get('email'), [Validators.required, this.validateEmail]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required, this.validatePassword]]
     })
   }
 
@@ -49,8 +49,13 @@ export class LoginComponent implements OnInit {
     this.$auth.loginByEmail(this.auth.getRawValue());
   }
 
-  private validateEmail(control: AbstractControl): ValidationErrors {
-    return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/.test(control.value) ? null : { invalid: { message: '請填寫正確Email格式' } };
+  private validateEmail(emailField: AbstractControl): ValidationErrors {
+    return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/.test(emailField.value) ? null : { invalid: { message: '請填寫正確Email格式' } };
   }
+
+  private validatePassword(passwordField: AbstractControl): ValidationErrors {
+    return /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/.test(passwordField.value) ? null : { invalid: { message: "請填寫正確密碼格式" } };
+  }
+
 
 }

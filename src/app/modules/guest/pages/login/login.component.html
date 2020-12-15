@@ -8,12 +8,15 @@
             <div [formGroup]="this.auth">
                 <div class="Login__Field">
                     <input formControlName="email" class="form-control" type="text" placeholder="電郵或電話號碼">
-                    <span *ngIf = 'this.auth.get("email").invalid && this.auth.get("email").touched'>{{this.getErrorMsg("email")}}</span>
+                    <span
+                        *ngIf='this.auth.get("email").invalid && this.auth.get("email").touched'>{{this.getErrorMsg("email")}}</span>
                 </div>
                 <div class="Login__Field">
                     <input formControlName="password" class="form-control" type="password" placeholder="密碼">
+                    <span
+                        *ngIf="this.auth.get('password').invalid && this.auth.get('password').touched">{{this.getErrorMsg('password')}}</span>
                 </div>
-                <button [disabled] = 'this.auth.invalid' (click)='this.login()'>登入</button>
+                <button [disabled]='this.auth.invalid' (click)='this.login()'>登入</button>
             </div>
             <div>
                 <div>
